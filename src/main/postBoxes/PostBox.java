@@ -6,23 +6,29 @@ import main.shipments.Letter;
 import main.shipments.Shipment;
 
 import java.util.HashSet;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class PostBox {
     private static int uniqueId = 1;
     private String postBoxId;
     private PostOffice postOffice;
-    private CopyOnWriteArrayList<Shipment> lettersInBox;
+    private BlockingQueue<Shipment> lettersInBox;
 
     public PostBox (PostOffice postOffice){
         this.postOffice = postOffice;
         this.postBoxId = "Post Box "+uniqueId++;
-        lettersInBox = new CopyOnWriteArrayList<>();
+        lettersInBox = new LinkedBlockingQueue<>();
     }
 
     public void addLetter(Shipment shipment){
         if(shipment.getType().equals(Shipment.ShipmentType.LETTER)){
-            lettersInBox.add(shipment);
+            try {
+                lettersInBox.put(shipment);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             shipment.getSender().setSent(true);
         }
         else {
@@ -34,19 +40,21 @@ public class PostBox {
             }
         }
     }
-    public HashSet<Shipment> emptyBox(){
-        HashSet<Shipment> set = new HashSet<>();
-        if(!lettersInBox.isEmpty()){
-            set.addAll(lettersInBox);
-            set.clear();
+    public Shipment removeShipment(){
+        Shipment shipment;
+        try {
+            return lettersInBox.take();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        else {
-            System.out.println(postBoxId+" is empty!");
-        }
-        return set;
+        return null;
     }
 
     public String getPostBoxId() {
         return postBoxId;
+    }
+
+    public BlockingQueue<Shipment> getLettersInBox() {
+        return lettersInBox;
     }
 }

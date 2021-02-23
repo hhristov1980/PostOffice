@@ -1,0 +1,65 @@
+================ ARCHIVE ==============
+Date: 2021-02-23
+	Shipment type: 
+	PARCEL
+		Shipment Id 3 Time: 19:00:23.493502
+		Shipment Id 10 Time: 19:00:23.502492
+		Shipment Id 11 Time: 19:00:23.502334
+		Shipment Id 46 Time: 19:00:23.499102
+		Shipment Id 50 Time: 19:00:23.487814
+		Shipment Id 53 Time: 19:00:23.498502
+		Shipment Id 72 Time: 19:00:23.496561
+		Shipment Id 82 Time: 19:00:23.495673
+		Shipment Id 94 Time: 19:00:23.494423
+		Shipment Id 100 Time: 19:00:23.493880
+		Total PARCEL: 10
+------------------------------------------
+	Shipment type: 
+	LETTER
+		Shipment Id 2 Time: 19:00:23.493637
+		Shipment Id 4 Time: 19:00:23.493362
+		Shipment Id 12 Time: 19:00:23.502238
+		Shipment Id 16 Time: 19:00:23.501956
+		Shipment Id 20 Time: 19:00:23.501602
+		Shipment Id 24 Time: 19:00:23.501228
+		Shipment Id 26 Time: 19:00:23.501076
+		Shipment Id 27 Time: 19:00:23.500920
+		Shipment Id 31 Time: 19:00:23.500674
+		Shipment Id 33 Time: 19:00:23.500465
+		Shipment Id 34 Time: 19:00:23.500359
+		Shipment Id 35 Time: 19:00:23.500268
+		Shipment Id 36 Time: 19:00:23.500161
+		Shipment Id 37 Time: 19:00:23.500037
+		Shipment Id 38 Time: 19:00:23.499910
+		Shipment Id 39 Time: 19:00:23.499807
+		Shipment Id 41 Time: 19:00:23.499607
+		Shipment Id 42 Time: 19:00:23.499485
+		Shipment Id 44 Time: 19:00:23.499311
+		Shipment Id 48 Time: 19:00:23.498908
+		Shipment Id 49 Time: 19:00:23.498789
+		Shipment Id 51 Time: 19:00:23.498660
+		Shipment Id 54 Time: 19:00:23.498312
+		Shipment Id 55 Time: 19:00:23.498223
+		Shipment Id 56 Time: 19:00:23.498123
+		Shipment Id 58 Time: 19:00:23.497823
+		Shipment Id 60 Time: 19:00:23.497639
+		Shipment Id 62 Time: 19:00:23.497488
+		Shipment Id 64 Time: 19:00:23.497226
+		Shipment Id 73 Time: 19:00:23.496400
+		Shipment Id 76 Time: 19:00:23.496055
+		Shipment Id 77 Time: 19:00:23.496175
+		Shipment Id 79 Time: 19:00:23.495915
+		Shipment Id 81 Time: 19:00:23.495781
+		Shipment Id 83 Time: 19:00:23.495490
+		Shipment Id 84 Time: 19:00:23.495382
+		Shipment Id 89 Time: 19:00:23.495096
+		Shipment Id 90 Time: 19:00:23.494968
+		Shipment Id 91 Time: 19:00:23.494858
+		Shipment Id 93 Time: 19:00:23.494627
+		Shipment Id 95 Time: 19:00:23.494340
+		Shipment Id 97 Time: 19:00:23.494157
+		Shipment Id 98 Time: 19:00:23.494069
+		Shipment Id 99 Time: 19:00:23.493984
+		Total LETTER: 44
+------------------------------------------
+================ END OF ARCHIVE ==============

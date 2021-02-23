@@ -13,12 +13,12 @@ public class JuniorPostman extends Postman{
     @Override
     public void run() {
         while (true){
-            postOffice.collectLetters(this);
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            postOffice.collectLetters(this);
             postOffice.dropLetters(this);
         }
     }

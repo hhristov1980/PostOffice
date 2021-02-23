@@ -18,7 +18,7 @@ public class PostOffice {
     private CopyOnWriteArraySet<PostBox> postBoxes;
     private CopyOnWriteArraySet<JuniorPostman> collectors;
     private CopyOnWriteArraySet<SeniorPostman> distributors;
-    private ConcurrentSkipListMap<LocalDate, ConcurrentSkipListMap<Integer,LocalTime>> archive;
+    private ConcurrentSkipListMap<LocalDate, ConcurrentSkipListMap<Shipment.ShipmentType,ConcurrentSkipListMap<Integer,LocalTime>>> archive;
     private BlockingQueue<Shipment> postOfficeStorage;
 
     public PostOffice(String name){
@@ -59,7 +59,10 @@ public class PostOffice {
         if(!archive.containsKey(shipment.getDateOfComingAtPostOffice())){
             archive.put(shipment.getDateOfComingAtPostOffice(),new ConcurrentSkipListMap<>());
         }
-        archive.get(shipment.getDateOfComingAtPostOffice()).put(shipment.getShipmentId(),shipment.getTimeOfComingAtPostOffice());
+        if(!archive.get(shipment.getDateOfComingAtPostOffice()).containsKey(shipment.getType())){
+            archive.get(shipment.getDateOfComingAtPostOffice()).put(shipment.getType(),new ConcurrentSkipListMap<>());
+        }
+        archive.get(shipment.getDateOfComingAtPostOffice()).get(shipment.getType()).put(shipment.getShipmentId(),shipment.getTimeOfComingAtPostOffice());
         try {
             postOfficeStorage.put(shipment);
         } catch (InterruptedException e) {
@@ -95,7 +98,11 @@ public class PostOffice {
             }
         }
         for(PostBox pb: postBoxes){
-            juniorPostman.getShipments().addAll(pb.emptyBox());
+            for(Shipment sh: pb.getLettersInBox()){
+                Shipment s = pb.removeShipment();
+                juniorPostman.getShipments().add(s);
+            }
+            CopyOnWriteArrayList<Shipment> list = new CopyOnWriteArrayList<>();
             System.out.println(juniorPostman.getFirstName()+" "+juniorPostman.getLastName()+" just checked "+pb.getPostBoxId());
         }
     }
@@ -110,14 +117,11 @@ public class PostOffice {
         else {
             System.out.println(juniorPostman.getFirstName()+" "+juniorPostman.getLastName()+" hasn't collected any letters");
         }
-        try {
-            wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
     }
 
     public synchronized void takeShipmentsFromStorageAndDeliver(SeniorPostman seniorPostman){
+        if(shipmentsInOffice>=50){
             for(int i = 0; i<50/ distributors.size(); i++){
                 if(!postOfficeStorage.isEmpty()){
                     try {
@@ -130,14 +134,23 @@ public class PostOffice {
             }
             System.out.println(seniorPostman.getFirstName()+" "+seniorPostman.getLastName()+" took "+seniorPostman.getShipments().size()+" shipments!");
             notifyAll();
-        try {
-            wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+//        else {
+//            try {
+//                wait();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
     }
 
-    public ConcurrentSkipListMap<LocalDate, ConcurrentSkipListMap<Integer, LocalTime>> getArchive() {
+    public ConcurrentSkipListMap<LocalDate, ConcurrentSkipListMap<Shipment.ShipmentType, ConcurrentSkipListMap<Integer, LocalTime>>> getArchive() {
         return archive;
     }
 }

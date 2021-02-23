@@ -36,10 +36,17 @@ public class Citizen extends Person{
         String lastName = Constants.lastNames[Randomizer.getRandomInt(0,Constants.lastNames.length-1)];
         String address = Constants.address[Randomizer.getRandomInt(0,Constants.address.length-1)];
         Citizen receiver = new Citizen(firstName,lastName,address,postOffice);
-        Shipment shipment = new Random().nextBoolean()? new Letter(Shipment.ShipmentType.LETTER, this, receiver)
-                :new Parcel(Shipment.ShipmentType.PARCEL, this,receiver, Randomizer.getRandomInt(10,100)
-                , Randomizer.getRandomInt(10,100),Randomizer.getRandomInt(10,100), new Random().nextBoolean());
-        postOffice.sendShipment(shipment);
+        int choice = Randomizer.getRandomInt(1,10);
+        Shipment shipment;
+        if(choice>=3){
+            shipment = new Letter(Shipment.ShipmentType.LETTER, this, receiver);
+            postOffice.sendShipment(shipment);
+        }
+        else {
+            shipment = new Parcel(Shipment.ShipmentType.PARCEL, this,receiver, Randomizer.getRandomInt(10,100)
+                    , Randomizer.getRandomInt(10,100),Randomizer.getRandomInt(10,100), new Random().nextBoolean());
+            postOffice.sendShipment(shipment);
+        }
         if(sent){
             System.out.println(this.firstName+" "+this.lastName+" sent a "+shipment.getType()+" to "+firstName+" "+lastName+" for "+shipment.getPrice());
         }

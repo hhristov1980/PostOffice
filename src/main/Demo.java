@@ -41,6 +41,7 @@ public class Demo {
             c.start();
         }
         postOffice.work();
+        stat.start();
 
     }
 }
